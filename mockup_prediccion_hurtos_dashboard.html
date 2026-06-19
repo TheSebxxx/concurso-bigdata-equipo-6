@@ -1,0 +1,302 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font-sans);background:var(--color-background-tertiary)}
+.app{display:flex;flex-direction:column;height:100vh;min-height:600px;background:var(--color-background-tertiary)}
+.topbar{display:flex;align-items:center;justify-content:space-between;padding:10px 16px;background:var(--color-background-primary);border-bottom:0.5px solid var(--color-border-tertiary)}
+.topbar-left{display:flex;align-items:center;gap:10px}
+.logo-badge{background:#1a3c6b;color:#fff;font-size:11px;font-weight:500;padding:4px 10px;border-radius:var(--border-radius-md)}
+.topbar-title{font-size:14px;font-weight:500;color:var(--color-text-primary)}
+.topbar-right{display:flex;align-items:center;gap:8px}
+.avatar{width:28px;height:28px;border-radius:50%;background:#B5D4F4;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:500;color:#0C447C}
+.layout{display:grid;grid-template-columns:180px 1fr 220px;gap:0;flex:1;overflow:hidden}
+.sidebar{background:var(--color-background-primary);border-right:0.5px solid var(--color-border-tertiary);padding:12px 0;display:flex;flex-direction:column;gap:2px}
+.nav-section{font-size:10px;font-weight:500;color:var(--color-text-tertiary);padding:8px 16px 4px;text-transform:uppercase;letter-spacing:.06em}
+.nav-item{display:flex;align-items:center;gap:8px;padding:7px 16px;font-size:12px;color:var(--color-text-secondary);cursor:pointer;border-left:3px solid transparent}
+.nav-item.active{color:#185FA5;background:#E6F1FB;border-left-color:#185FA5;font-weight:500}
+.nav-item i{font-size:15px}
+.main{display:flex;flex-direction:column;overflow:auto;padding:14px}
+.kpi-row{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px}
+.kpi{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);padding:10px 12px}
+.kpi-label{font-size:10px;color:var(--color-text-secondary);margin-bottom:4px}
+.kpi-value{font-size:20px;font-weight:500;color:var(--color-text-primary)}
+.kpi-delta{font-size:10px;margin-top:2px}
+.kpi-delta.up{color:#A32D2D}
+.kpi-delta.dn{color:#3B6D11}
+.content-row{display:grid;grid-template-columns:1fr 200px;gap:10px;flex:1}
+.map-card{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);overflow:hidden}
+.card-header{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;border-bottom:0.5px solid var(--color-border-tertiary)}
+.card-title{font-size:12px;font-weight:500;color:var(--color-text-primary)}
+.filter-row{display:flex;gap:6px}
+.chip{font-size:10px;padding:3px 8px;border-radius:20px;border:0.5px solid var(--color-border-secondary);color:var(--color-text-secondary);cursor:pointer}
+.chip.sel{background:#E6F1FB;border-color:#85B7EB;color:#0C447C}
+.map-body{position:relative;height:220px;background:#d4e9c7;overflow:hidden}
+.map-bg{width:100%;height:100%;object-fit:cover}
+svg.map-overlay{position:absolute;top:0;left:0;width:100%;height:100%}
+.legend-bar{display:flex;align-items:center;gap:6px;padding:6px 14px;border-top:0.5px solid var(--color-border-tertiary)}
+.legend-label{font-size:10px;color:var(--color-text-secondary)}
+.grad{height:8px;width:80px;border-radius:4px;background:linear-gradient(to right,#9FE1CB,#EF9F27,#E24B4A)}
+.right-col{display:flex;flex-direction:column;gap:10px}
+.rec-card{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);overflow:hidden}
+.rec-list{padding:10px}
+.rec-item{display:flex;gap:8px;padding:6px 0;border-bottom:0.5px solid var(--color-border-tertiary)}
+.rec-item:last-child{border-bottom:none}
+.rec-dot{width:8px;height:8px;border-radius:50%;margin-top:4px;flex-shrink:0}
+.rec-text{font-size:10px;color:var(--color-text-secondary);line-height:1.4}
+.rec-tag{font-size:9px;font-weight:500;display:inline-block;margin-top:2px;padding:1px 5px;border-radius:3px}
+.tag-alta{background:#FCEBEB;color:#A32D2D}
+.tag-media{background:#FAEEDA;color:#854F0B}
+.tag-baja{background:#EAF3DE;color:#3B6D11}
+.alert-card{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);overflow:hidden}
+.alert-item{display:flex;align-items:flex-start;gap:8px;padding:8px 10px;border-bottom:0.5px solid var(--color-border-tertiary)}
+.alert-item:last-child{border-bottom:none}
+.alert-icon{font-size:14px;margin-top:1px}
+.alert-text{font-size:10px;color:var(--color-text-primary);line-height:1.4}
+.alert-sub{font-size:9px;color:var(--color-text-secondary);margin-top:1px}
+.chatpanel{background:var(--color-background-primary);border-left:0.5px solid var(--color-border-tertiary);display:flex;flex-direction:column}
+.chat-header{display:flex;align-items:center;gap:8px;padding:10px 12px;border-bottom:0.5px solid var(--color-border-tertiary)}
+.ai-avatar{width:26px;height:26px;border-radius:50%;background:#1a3c6b;display:flex;align-items:center;justify-content:center}
+.ai-avatar i{font-size:14px;color:#fff}
+.chat-name{font-size:12px;font-weight:500;color:var(--color-text-primary)}
+.chat-sub{font-size:10px;color:var(--color-text-secondary)}
+.online-dot{width:7px;height:7px;border-radius:50%;background:#639922;margin-left:auto}
+.chat-body{flex:1;padding:10px 12px;display:flex;flex-direction:column;gap:8px;overflow:auto}
+.bubble{max-width:85%;padding:7px 10px;border-radius:var(--border-radius-lg);font-size:10px;line-height:1.5}
+.bubble.bot{background:#E6F1FB;color:#0C447C;align-self:flex-start;border-bottom-left-radius:4px}
+.bubble.user{background:#1a3c6b;color:#fff;align-self:flex-end;border-bottom-right-radius:4px}
+.chat-footer{padding:8px 12px;border-top:0.5px solid var(--color-border-tertiary);display:flex;gap:6px}
+.chat-input{flex:1;font-size:11px;padding:6px 10px;border-radius:20px;border:0.5px solid var(--color-border-secondary);background:var(--color-background-secondary);color:var(--color-text-primary)}
+.send-btn{width:28px;height:28px;border-radius:50%;background:#1a3c6b;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.send-btn i{font-size:13px;color:#fff}
+.chip-tags{display:flex;gap:4px;flex-wrap:wrap;padding:0 12px 8px}
+.quick-chip{font-size:9px;padding:3px 7px;border-radius:12px;border:0.5px solid var(--color-border-secondary);color:var(--color-text-secondary);cursor:pointer;background:var(--color-background-secondary)}
+</style>
+
+<h2 class="sr-only">Mockup del sistema de predicción de hurtos en Colombia con dashboard, mapa de calor, recomendaciones y asistente de IA</h2>
+
+<div class="app">
+  <div class="topbar">
+    <div class="topbar-left">
+      <div class="logo-badge"><i class="ti ti-shield-check" style="font-size:12px;vertical-align:-1px;margin-right:4px" aria-hidden="true"></i>SEPH Colombia</div>
+      <span class="topbar-title">Sistema de Estadísticas Preventivas de Hurtos</span>
+    </div>
+    <div class="topbar-right">
+      <span style="font-size:11px;color:var(--color-text-secondary)">Analista de Seguridad</span>
+      <div class="avatar">AS</div>
+    </div>
+  </div>
+
+  <div class="layout">
+    <!-- Sidebar -->
+    <nav class="sidebar" aria-label="Navegación principal">
+      <div class="nav-section">Principal</div>
+      <div class="nav-item active"><i class="ti ti-layout-dashboard" aria-hidden="true"></i>Dashboard</div>
+      <div class="nav-item"><i class="ti ti-map-2" aria-hidden="true"></i>Mapa de calor</div>
+      <div class="nav-item"><i class="ti ti-chart-bar" aria-hidden="true"></i>Estadísticas</div>
+      <div class="nav-section">Gestión</div>
+      <div class="nav-item"><i class="ti ti-bulb" aria-hidden="true"></i>Recomendaciones</div>
+      <div class="nav-item"><i class="ti ti-bell" aria-hidden="true"></i>Alertas <span style="margin-left:auto;background:#FCEBEB;color:#A32D2D;font-size:9px;padding:1px 5px;border-radius:8px">3</span></div>
+      <div class="nav-item"><i class="ti ti-database" aria-hidden="true"></i>Datasets</div>
+      <div class="nav-section">Admin</div>
+      <div class="nav-item"><i class="ti ti-users" aria-hidden="true"></i>Usuarios</div>
+      <div class="nav-item"><i class="ti ti-settings" aria-hidden="true"></i>Configuración</div>
+    </nav>
+
+    <!-- Main content -->
+    <main class="main">
+      <!-- KPI row -->
+      <div class="kpi-row">
+        <div class="kpi">
+          <div class="kpi-label"><i class="ti ti-alert-triangle" style="font-size:11px;color:#E24B4A;margin-right:3px" aria-hidden="true"></i>Total hurtos</div>
+          <div class="kpi-value">633,804</div>
+          <div class="kpi-delta up"><i class="ti ti-arrow-up" style="font-size:10px" aria-hidden="true"></i> +12.4% vs período ant.</div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-label"><i class="ti ti-map-pin" style="font-size:11px;color:#185FA5;margin-right:3px" aria-hidden="true"></i>Municipio crítico</div>
+          <div class="kpi-value" style="font-size:14px;padding-top:4px">Bogotá D.C.</div>
+          <div class="kpi-delta up">327,241 eventos registrados</div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-label"><i class="ti ti-building-store" style="font-size:11px;color:#854F0B;margin-right:3px" aria-hidden="true"></i>Tipo prevalente</div>
+          <div class="kpi-value" style="font-size:12px;padding-top:4px">Ent. Comerciales</div>
+          <div class="kpi-delta up">68% del total</div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-label"><i class="ti ti-trending-down" style="font-size:11px;color:#3B6D11;margin-right:3px" aria-hidden="true"></i>Municipios en baja</div>
+          <div class="kpi-value">142</div>
+          <div class="kpi-delta dn"><i class="ti ti-arrow-down" style="font-size:10px" aria-hidden="true"></i> Tendencia favorable</div>
+        </div>
+      </div>
+
+      <!-- Map + side panels -->
+      <div class="content-row">
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <!-- Map -->
+          <div class="map-card">
+            <div class="card-header">
+              <span class="card-title"><i class="ti ti-flame" style="font-size:13px;color:#D85A30;margin-right:4px" aria-hidden="true"></i>Mapa de calor — hurtos por municipio</span>
+              <div class="filter-row">
+                <span class="chip sel">Todos</span>
+                <span class="chip">Comerciales</span>
+                <span class="chip">Residencias</span>
+                <span class="chip"><i class="ti ti-sliders" style="font-size:11px" aria-hidden="true"></i> Filtros</span>
+              </div>
+            </div>
+            <div class="map-body">
+              <svg viewBox="0 0 480 220" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;display:block">
+                <!-- Map bg -->
+                <rect width="480" height="220" fill="#c8dfc1"/>
+                <!-- Colombia outline simplified -->
+                <path d="M160,10 L200,8 L240,15 L280,12 L310,30 L330,60 L340,100 L320,140 L300,170 L270,195 L240,205 L210,200 L180,185 L155,160 L140,130 L130,95 L135,60 L145,30 Z" fill="#b8d4ad" stroke="#8ab87e" stroke-width="1"/>
+                <!-- Heat zones -->
+                <ellipse cx="245" cy="75" rx="38" ry="30" fill="#E24B4A" opacity=".72"/>
+                <ellipse cx="245" cy="75" rx="22" ry="18" fill="#A32D2D" opacity=".55"/>
+                <ellipse cx="205" cy="140" rx="26" ry="22" fill="#EF9F27" opacity=".68"/>
+                <ellipse cx="205" cy="140" rx="14" ry="12" fill="#BA7517" opacity=".5"/>
+                <ellipse cx="275" cy="145" rx="20" ry="16" fill="#EF9F27" opacity=".6"/>
+                <ellipse cx="290" cy="110" rx="16" ry="12" fill="#E24B4A" opacity=".5"/>
+                <ellipse cx="170" cy="100" rx="14" ry="11" fill="#EF9F27" opacity=".5"/>
+                <ellipse cx="230" cy="170" rx="12" ry="10" fill="#97C459" opacity=".7"/>
+                <ellipse cx="260" cy="55" rx="10" ry="8" fill="#EF9F27" opacity=".55"/>
+                <ellipse cx="185" cy="68" rx="9" ry="7" fill="#97C459" opacity=".6"/>
+                <!-- City labels -->
+                <text x="248" y="72" text-anchor="middle" font-size="7" font-weight="500" fill="#501313">Bogotá</text>
+                <text x="205" y="137" text-anchor="middle" font-size="7" font-weight="500" fill="#412402">Medellín</text>
+                <text x="277" y="142" text-anchor="middle" font-size="7" font-weight="500" fill="#412402">Cali</text>
+                <text x="293" y="107" text-anchor="middle" font-size="7" fill="#501313">Cúcuta</text>
+                <text x="172" y="97" text-anchor="middle" font-size="6.5" fill="#412402">B/quilla</text>
+                <!-- Prediction outline -->
+                <ellipse cx="230" cy="170" rx="18" ry="15" fill="none" stroke="#185FA5" stroke-width="1.2" stroke-dasharray="4,3"/>
+                <text x="230" y="190" text-anchor="middle" font-size="6.5" fill="#185FA5">▲ Predicción</text>
+                <!-- compass -->
+                <text x="450" y="20" font-size="9" fill="#5F5E5A" text-anchor="middle">N</text>
+                <line x1="450" y1="24" x2="450" y2="34" stroke="#5F5E5A" stroke-width="0.8"/>
+              </svg>
+            </div>
+            <div class="legend-bar">
+              <span class="legend-label">Bajo</span>
+              <div class="grad"></div>
+              <span class="legend-label">Alto</span>
+              <span style="margin-left:auto;font-size:10px;color:var(--color-text-secondary)"><span style="color:#185FA5">- - -</span> Predicción 30d</span>
+            </div>
+          </div>
+
+          <!-- Trend chart mockup -->
+          <div class="map-card">
+            <div class="card-header">
+              <span class="card-title"><i class="ti ti-chart-line" style="font-size:13px;color:#185FA5;margin-right:4px" aria-hidden="true"></i>Tendencia mensual de hurtos</span>
+              <span style="font-size:10px;color:var(--color-text-secondary)">Ene 2026 – Jun 2026</span>
+            </div>
+            <div style="padding:10px 14px">
+              <svg viewBox="0 0 400 80" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block">
+                <line x1="30" y1="5" x2="30" y2="68" stroke="var(--color-border-tertiary)" stroke-width="0.5"/>
+                <line x1="30" y1="68" x2="398" y2="68" stroke="var(--color-border-tertiary)" stroke-width="0.5"/>
+                <!-- Grid -->
+                <line x1="30" y1="25" x2="398" y2="25" stroke="var(--color-border-tertiary)" stroke-width="0.4" stroke-dasharray="3,3"/>
+                <line x1="30" y1="45" x2="398" y2="45" stroke="var(--color-border-tertiary)" stroke-width="0.4" stroke-dasharray="3,3"/>
+                <!-- Line data: Ene-Jun hurts going up then spike -->
+                <polyline points="55,55 115,48 175,42 235,38 295,30 355,20" fill="none" stroke="#E24B4A" stroke-width="2" stroke-linejoin="round"/>
+                <!-- Prediction dashed continuation -->
+                <polyline points="355,20 390,15" fill="none" stroke="#185FA5" stroke-width="1.5" stroke-dasharray="4,3"/>
+                <!-- Dots -->
+                <circle cx="55"  cy="55" r="3" fill="#E24B4A"/>
+                <circle cx="115" cy="48" r="3" fill="#E24B4A"/>
+                <circle cx="175" cy="42" r="3" fill="#E24B4A"/>
+                <circle cx="235" cy="38" r="3" fill="#E24B4A"/>
+                <circle cx="295" cy="30" r="3" fill="#E24B4A"/>
+                <circle cx="355" cy="20" r="3" fill="#E24B4A"/>
+                <!-- Labels x -->
+                <text x="55"  y="76" text-anchor="middle" font-size="8" fill="#888780">Ene</text>
+                <text x="115" y="76" text-anchor="middle" font-size="8" fill="#888780">Feb</text>
+                <text x="175" y="76" text-anchor="middle" font-size="8" fill="#888780">Mar</text>
+                <text x="235" y="76" text-anchor="middle" font-size="8" fill="#888780">Abr</text>
+                <text x="295" y="76" text-anchor="middle" font-size="8" fill="#888780">May</text>
+                <text x="355" y="76" text-anchor="middle" font-size="8" fill="#888780">Jun</text>
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right column -->
+        <div class="right-col">
+          <div class="rec-card">
+            <div class="card-header">
+              <span class="card-title"><i class="ti ti-bulb" style="font-size:13px;color:#BA7517;margin-right:4px" aria-hidden="true"></i>Recomendaciones</span>
+            </div>
+            <div class="rec-list">
+              <div class="rec-item">
+                <div class="rec-dot" style="background:#E24B4A"></div>
+                <div class="rec-text">Evitar portar objetos de valor en vía pública en zonas de alta incidencia <span class="rec-tag tag-alta">Alta</span></div>
+              </div>
+              <div class="rec-item">
+                <div class="rec-dot" style="background:#E24B4A"></div>
+                <div class="rec-text">Reforzar sistemas de seguridad en locales comerciales entre 6 p.m. y 10 p.m. <span class="rec-tag tag-alta">Alta</span></div>
+              </div>
+              <div class="rec-item">
+                <div class="rec-dot" style="background:#EF9F27"></div>
+                <div class="rec-text">Instalar cámaras de videovigilancia en entradas de residencias <span class="rec-tag tag-media">Media</span></div>
+              </div>
+              <div class="rec-item">
+                <div class="rec-dot" style="background:#EF9F27"></div>
+                <div class="rec-text">No aceptar bebidas de desconocidos (riesgo escopolamina) <span class="rec-tag tag-media">Media</span></div>
+              </div>
+              <div class="rec-item">
+                <div class="rec-dot" style="background:#639922"></div>
+                <div class="rec-text">Reportar actividad sospechosa a la línea 123 <span class="rec-tag tag-baja">Baja</span></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="alert-card">
+            <div class="card-header">
+              <span class="card-title"><i class="ti ti-bell" style="font-size:13px;color:#A32D2D;margin-right:4px" aria-hidden="true"></i>Alertas activas</span>
+            </div>
+            <div class="alert-item">
+              <i class="ti ti-alert-circle alert-icon" style="color:#E24B4A" aria-hidden="true"></i>
+              <div><div class="alert-text">Bogotá D.C. superó 2,000 hurtos esta semana</div><div class="alert-sub">Umbral configurado: 1,800 · hace 2h</div></div>
+            </div>
+            <div class="alert-item">
+              <i class="ti ti-alert-triangle alert-icon" style="color:#EF9F27" aria-hidden="true"></i>
+              <div><div class="alert-text">Medellín: incremento del 40% en hurto con arma blanca</div><div class="alert-sub">Período: mayo–jun 2026 · hace 5h</div></div>
+            </div>
+            <div class="alert-item">
+              <i class="ti ti-info-circle alert-icon" style="color:#185FA5" aria-hidden="true"></i>
+              <div><div class="alert-text">Dataset actualizado: 633,804 registros</div><div class="alert-sub">Ingesta automática · hoy 06:00</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Chat panel -->
+    <aside class="chatpanel">
+      <div class="chat-header">
+        <div class="ai-avatar"><i class="ti ti-robot" aria-hidden="true"></i></div>
+        <div>
+          <div class="chat-name">SEPH IA</div>
+          <div class="chat-sub">Groq · llama-3.3-70b</div>
+        </div>
+        <div class="online-dot" title="En línea"></div>
+      </div>
+
+      <div class="chat-body">
+        <div class="bubble bot">¡Hola! Soy SEPH, tu asistente inteligente. Puedo responderte preguntas sobre hurtos en Colombia usando datos oficiales de la Policía Nacional. ¿En qué te ayudo?</div>
+        <div class="bubble user">¿Cuáles son los municipios más peligrosos en el Atlántico?</div>
+        <div class="bubble bot">Según el reporte de la Policía Nacional (jun 2026), en el Atlántico los municipios con mayor incidencia son:<br><br>1. <strong>Barranquilla</strong> — 4,821 eventos<br>2. <strong>Soledad</strong> — 1,203 eventos<br>3. <strong>Galapa</strong> — 287 eventos<br><br>El tipo predominante es hurto a entidades comerciales (68%). ¿Deseas ver recomendaciones para esta zona?</div>
+        <div class="bubble user">Sí, ¿qué medidas recomiendas?</div>
+        <div class="bubble bot">Para el Atlántico te recomiendo:<br><br>• Reforzar vigilancia en horario nocturno<br>• Instalar alarmas perimetrales en locales<br>• Evitar exhibir objetos de valor en vía pública<br><br><span style="color:#185FA5;text-decoration:underline;cursor:pointer">Ver todas las recomendaciones →</span></div>
+      </div>
+
+      <div class="chip-tags">
+        <span class="quick-chip">¿Zonas de riesgo en Bogotá?</span>
+        <span class="quick-chip">Tipos de hurto más frecuentes</span>
+        <span class="quick-chip">Predicción próximo mes</span>
+      </div>
+
+      <div class="chat-footer">
+        <input class="chat-input" type="text" placeholder="Escribe tu pregunta..." aria-label="Mensaje al asistente"/>
+        <button class="send-btn" aria-label="Enviar mensaje"><i class="ti ti-send" aria-hidden="true"></i></button>
+      </div>
+    </aside>
+  </div>
+</div>
