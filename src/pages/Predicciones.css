@@ -1,0 +1,286 @@
+/* ============================================================
+   Predicciones.css — Estilos del módulo de predicciones ML
+   ============================================================ */
+
+/* ── Encabezado ───────────────────────────────────────────── */
+.pred-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.pred-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #1a2b4a;
+}
+
+.pred-subtitle {
+  font-size: 11px;
+  color: #8a9bbf;
+  margin-top: 3px;
+}
+
+/* ── Disclaimer ───────────────────────────────────────────── */
+.pred-disclaimer {
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  border-radius: 10px;
+  padding: 10px 16px;
+  margin-bottom: 16px;
+  font-size: 11px;
+  color: #15803d;
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  line-height: 1.5;
+}
+
+/* ── Panel de filtros ─────────────────────────────────────── */
+.pred-filtros {
+  background: #fff;
+  border: 1px solid #e2e6ed;
+  border-radius: 12px;
+  padding: 12px 18px;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  box-shadow: 0 1px 4px rgba(26,58,107,.04);
+}
+
+.pred-filtro-grupo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.pred-filtro-label {
+  font-size: 11px;
+  color: #8a9bbf;
+  white-space: nowrap;
+  font-weight: 500;
+}
+
+.pred-filtros-divider {
+  width: 1px;
+  height: 26px;
+  background: #e2e6ed;
+  flex-shrink: 0;
+}
+
+/* Chips de nivel */
+.pred-niveles {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.pred-nivel-chip {
+  padding: 4px 11px;
+  border-radius: 20px;
+  font-size: 10px;
+  cursor: pointer;
+  border: 1px solid #e2e6ed;
+  background: transparent;
+  color: #7a8fba;
+  font-family: inherit;
+  font-weight: 400;
+  transition: all 0.15s;
+}
+
+.pred-nivel-chip:hover {
+  border-color: #1a3a6b;
+  color: #1a3a6b;
+  background: #f4f7fc;
+}
+
+.pred-nivel-chip.activo-todos {
+  background: #1a3a6b;
+  border-color: #1a3a6b;
+  color: #fff;
+  font-weight: 500;
+}
+
+.pred-nivel-chip.activo-critico {
+  background: #fee2e225;
+  border-color: #ef4444;
+  color: #dc2626;
+  font-weight: 600;
+}
+
+.pred-nivel-chip.activo-alto {
+  background: #fff7ed;
+  border-color: #f97316;
+  color: #ea580c;
+  font-weight: 600;
+}
+
+.pred-nivel-chip.activo-medio {
+  background: #fefce8;
+  border-color: #eab308;
+  color: #ca8a04;
+  font-weight: 600;
+}
+
+.pred-nivel-chip.activo-bajo {
+  background: #f0fdf4;
+  border-color: #22c55e;
+  color: #16a34a;
+  font-weight: 600;
+}
+
+/* ── KPIs ─────────────────────────────────────────────────── */
+.pred-kpis {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.kpi-card {
+  background: #fff;
+  border: 1px solid #e2e6ed;
+  border-radius: 12px;
+  padding: 14px 16px;
+  position: relative;
+  overflow: hidden;
+  transition: box-shadow 0.2s;
+}
+
+.kpi-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 3px;
+  background: #1a3a6b;
+}
+
+.kpi-card:hover { box-shadow: 0 3px 12px rgba(26,58,107,.08); }
+
+.kpi-label {
+  font-size: 10px;
+  color: #8a9bbf;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  margin-bottom: 6px;
+  font-weight: 500;
+}
+
+.kpi-value {
+  font-size: 22px;
+  font-weight: 700;
+  color: #1a2b4a;
+  line-height: 1.1;
+}
+
+.kpi-sub {
+  font-size: 11px;
+  color: #b0bcd4;
+  margin-top: 5px;
+}
+
+.kpi-up { color: #dc2626 !important; }
+
+/* ── Leyenda del mapa ─────────────────────────────────────── */
+.pred-leyenda {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+}
+
+.pred-leyenda-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+  color: #5a6e8a;
+}
+
+.pred-leyenda-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+/* ── Mapa ─────────────────────────────────────────────────── */
+.pred-mapa-container {
+  height: 480px;
+  position: relative;
+}
+
+/* ── Popup ────────────────────────────────────────────────── */
+.pred-popup {
+  background: #fff;
+  color: #1a2b4a;
+  padding: 12px 14px;
+  border-radius: 10px;
+  min-width: 200px;
+  font-size: 12px;
+  box-shadow: 0 4px 16px rgba(26,58,107,.12);
+}
+
+.pred-popup-titulo {
+  font-weight: 700;
+  font-size: 13px;
+  margin-bottom: 4px;
+  color: #1a2b4a;
+}
+
+.pred-popup-depto {
+  color: #8a9bbf;
+  margin-bottom: 8px;
+  font-size: 11px;
+}
+
+.pred-popup-fila {
+  margin-bottom: 4px;
+  color: #5a6e8a;
+  font-size: 11px;
+}
+
+.pred-popup-fila strong { color: #1a2b4a; font-weight: 600; }
+
+.pred-popup-confianza { color: #16a34a; font-weight: 600; }
+
+/* ── Tabla ────────────────────────────────────────────────── */
+.pred-tabla-scroll {
+  overflow-x: auto;
+  max-height: 380px;
+  overflow-y: auto;
+}
+
+.pred-tabla-count {
+  font-size: 11px;
+  color: #8a9bbf;
+  background: #f4f7fc;
+  padding: 3px 10px;
+  border-radius: 12px;
+}
+
+/* Leaflet overrides tema claro */
+.leaflet-popup-content-wrapper {
+  background: transparent !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+.leaflet-popup-content { margin: 0 !important; }
+.leaflet-popup-tip-container { display: none; }
+
+.leaflet-control-zoom {
+  border: 1px solid #e2e6ed !important;
+  border-radius: 8px !important;
+  box-shadow: 0 2px 8px rgba(26,58,107,.1) !important;
+}
+.leaflet-control-zoom a {
+  background: #fff !important;
+  color: #1a3a6b !important;
+  border-color: #e2e6ed !important;
+}
+.leaflet-control-zoom a:hover { background: #f4f7fc !important; }

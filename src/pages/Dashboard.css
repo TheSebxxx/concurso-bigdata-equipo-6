@@ -1,0 +1,183 @@
+/* ============================================================
+   Dashboard.css — Estilos específicos del Dashboard principal
+   ============================================================ */
+
+/* ── Encabezado ───────────────────────────────────────────── */
+.dashboard-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 22px;
+}
+
+.dashboard-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #1a2b4a;
+}
+
+.dashboard-subtitle {
+  font-size: 11px;
+  color: #8a9bbf;
+  margin-top: 2px;
+}
+
+/* ── KPI grid con colores diferenciados ───────────────────── */
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 14px;
+  margin-bottom: 20px;
+}
+
+.kpi-card {
+  background: #fff;
+  border: 1px solid #e2e6ed;
+  border-radius: 12px;
+  padding: 16px 18px;
+  position: relative;
+  overflow: hidden;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+
+.kpi-card:hover {
+  box-shadow: 0 4px 18px rgba(26,58,107,.1);
+  transform: translateY(-1px);
+}
+
+/* Franja superior de color por card */
+.kpi-card:nth-child(1)::before { background: #1a3a6b; }
+.kpi-card:nth-child(2)::before { background: #dc2626; }
+.kpi-card:nth-child(3)::before { background: #d97706; }
+.kpi-card:nth-child(4)::before { background: #16a34a; }
+
+.kpi-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 3px;
+}
+
+.kpi-label {
+  font-size: 10px;
+  color: #8a9bbf;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.kpi-value {
+  font-size: 26px;
+  font-weight: 700;
+  color: #1a2b4a;
+  line-height: 1.1;
+}
+
+.kpi-sub {
+  font-size: 11px;
+  color: #b0bcd4;
+  margin-top: 6px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.kpi-up   { color: #dc2626 !important; }
+.kpi-down { color: #16a34a !important; }
+
+/* ── Fila de filtros ──────────────────────────────────────── */
+.filter-row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+  align-items: center;
+}
+
+.filter-chip {
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 12px;
+  border: 1px solid #e2e6ed;
+  color: #7a8fba;
+  cursor: pointer;
+  background: #fff;
+  transition: all 0.15s;
+  font-family: inherit;
+  font-weight: 400;
+}
+
+.filter-chip:hover {
+  border-color: #1a3a6b;
+  color: #1a3a6b;
+  background: #f4f7fc;
+}
+
+.filter-chip.active {
+  background: #1a3a6b;
+  border-color: #1a3a6b;
+  color: #fff;
+  font-weight: 500;
+}
+
+/* ── Tabla de ranking ─────────────────────────────────────── */
+.ranking-scroll {
+  overflow-x: auto;
+  max-height: 440px;
+  overflow-y: auto;
+}
+
+.ranking-count {
+  font-size: 11px;
+  color: #8a9bbf;
+  background: #f4f7fc;
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-weight: 500;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+}
+
+.data-table th {
+  background: #f4f7fc;
+  color: #5a6e8a;
+  padding: 10px 14px;
+  text-align: left;
+  font-weight: 500;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  border-bottom: 1px solid #e2e6ed;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.data-table td {
+  padding: 10px 14px;
+  border-bottom: 1px solid #f0f2f7;
+  color: #1a2b4a;
+}
+
+.data-table tr:last-child td { border-bottom: none; }
+
+.data-table tbody tr:hover td {
+  background: #f4f7fc;
+}
+
+.badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: .03em;
+}
+
+.badge-alto  { background: #fee2e2; color: #dc2626; }
+.badge-medio { background: #fef9c3; color: #ca8a04; }
+.badge-bajo  { background: #dcfce7; color: #16a34a; }

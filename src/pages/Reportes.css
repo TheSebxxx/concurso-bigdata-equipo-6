@@ -1,0 +1,641 @@
+/* ============================================================
+   Reportes.css — Estilos del módulo de reportes ciudadanos
+   ============================================================ */
+
+/* ── Encabezado ───────────────────────────────────────────── */
+.rep-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.rep-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #1a2b4a;
+  margin: 0;
+}
+
+/* ── Botón login X ────────────────────────────────────────── */
+.btn-login-x {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #000;
+  border: 1px solid #1a2b4a;
+  color: #fff;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 12px;
+  cursor: pointer;
+  font-family: inherit;
+  font-weight: 500;
+  transition: background 0.15s;
+}
+
+.btn-login-x:hover { background: #1a1a1a; }
+
+/* ── Usuario logueado ─────────────────────────────────────── */
+.rep-usuario {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.rep-usuario-avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #e2e6ed;
+}
+
+.rep-usuario-nombre {
+  font-size: 12px;
+  color: #5a6e8a;
+  font-weight: 500;
+}
+
+.btn-salir {
+  background: transparent;
+  border: 1px solid #e2e6ed;
+  color: #8a9bbf;
+  padding: 5px 12px;
+  border-radius: 6px;
+  font-size: 11px;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.15s;
+}
+
+.btn-salir:hover {
+  border-color: #dc2626;
+  color: #dc2626;
+  background: #fff5f5;
+}
+
+/* ── KPIs de métricas ─────────────────────────────────────── */
+.rep-kpis {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.kpi-card {
+  background: #fff;
+  border: 1px solid #e2e6ed;
+  border-radius: 12px;
+  padding: 14px 16px;
+  position: relative;
+  overflow: hidden;
+  transition: box-shadow 0.2s;
+}
+
+.kpi-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 3px;
+  background: #1a3a6b;
+}
+
+.kpi-card:hover { box-shadow: 0 3px 12px rgba(26,58,107,.08); }
+
+.kpi-label {
+  font-size: 10px;
+  color: #8a9bbf;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  margin-bottom: 6px;
+  font-weight: 500;
+}
+
+.kpi-value {
+  font-size: 24px;
+  font-weight: 700;
+  color: #1a2b4a;
+}
+
+.kpi-sub {
+  font-size: 11px;
+  color: #b0bcd4;
+  margin-top: 5px;
+}
+
+/* ── Layout principal ─────────────────────────────────────── */
+.rep-layout {
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: 20px;
+}
+
+/* ── Botón nueva publicación ──────────────────────────────── */
+.btn-nueva-pub {
+  width: 100%;
+  background: #fff;
+  border: 1px solid #e2e6ed;
+  color: #8a9bbf;
+  padding: 12px 16px;
+  border-radius: 10px;
+  font-size: 13px;
+  cursor: pointer;
+  margin-bottom: 16px;
+  text-align: left;
+  font-family: inherit;
+  transition: all 0.15s;
+  box-shadow: 0 1px 4px rgba(26,58,107,.04);
+}
+
+.btn-nueva-pub:hover {
+  border-color: #1a3a6b;
+  color: #1a3a6b;
+  background: #f4f7fc;
+}
+
+/* ── Formulario nuevo reporte ─────────────────────────────── */
+.rep-form-card {
+  background: #fff;
+  border: 1px solid #e2e6ed;
+  border-radius: 12px;
+  padding: 18px;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 8px rgba(26,58,107,.06);
+}
+
+.rep-form-titulo-h3 {
+  font-size: 13px;
+  font-weight: 600;
+  color: #1a2b4a;
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.rep-form-input {
+  width: 100%;
+  background: #f4f7fc;
+  border: 1px solid #e2e6ed;
+  color: #1a2b4a;
+  padding: 9px 12px;
+  border-radius: 8px;
+  font-size: 12px;
+  margin-bottom: 8px;
+  outline: none;
+  font-family: inherit;
+  transition: border-color 0.15s;
+}
+
+.rep-form-input:focus {
+  border-color: #1a3a6b;
+  background: #fff;
+  box-shadow: 0 0 0 2px #1a3a6b12;
+}
+
+.rep-form-input::placeholder { color: #b0bcd4; }
+
+.rep-form-textarea {
+  width: 100%;
+  background: #f4f7fc;
+  border: 1px solid #e2e6ed;
+  color: #1a2b4a;
+  padding: 9px 12px;
+  border-radius: 8px;
+  font-size: 12px;
+  margin-bottom: 8px;
+  outline: none;
+  resize: vertical;
+  font-family: inherit;
+  transition: border-color 0.15s;
+}
+
+.rep-form-textarea:focus {
+  border-color: #1a3a6b;
+  background: #fff;
+  box-shadow: 0 0 0 2px #1a3a6b12;
+}
+
+.rep-form-textarea::placeholder { color: #b0bcd4; }
+
+.rep-form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.rep-form-select {
+  background: #f4f7fc;
+  border: 1px solid #e2e6ed;
+  color: #1a2b4a;
+  padding: 9px 10px;
+  border-radius: 8px;
+  font-size: 12px;
+  outline: none;
+  font-family: inherit;
+  cursor: pointer;
+  transition: border-color 0.15s;
+}
+
+.rep-form-select:focus { border-color: #1a3a6b; }
+
+/* Botón adjuntar imagen */
+.btn-adjuntar {
+  background: #fff;
+  border: 1.5px dashed #c8d3e8;
+  color: #8a9bbf;
+  padding: 9px 14px;
+  border-radius: 8px;
+  font-size: 12px;
+  cursor: pointer;
+  width: 100%;
+  font-family: inherit;
+  transition: all 0.15s;
+  text-align: left;
+}
+
+.btn-adjuntar:hover {
+  border-color: #1a3a6b;
+  color: #1a3a6b;
+  background: #f4f7fc;
+}
+
+.rep-preview-img {
+  width: 100%;
+  max-height: 160px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-top: 8px;
+  border: 1px solid #e2e6ed;
+}
+
+.rep-form-acciones {
+  display: flex;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.btn-publicar {
+  flex: 1;
+  background: #1a3a6b;
+  border: none;
+  color: #fff;
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 12px;
+  cursor: pointer;
+  font-family: inherit;
+  font-weight: 500;
+  transition: all 0.15s;
+}
+
+.btn-publicar:hover:not(:disabled) {
+  background: #153060;
+  box-shadow: 0 2px 8px rgba(26,58,107,.2);
+}
+
+.btn-publicar:disabled { opacity: 0.55; cursor: not-allowed; }
+
+.btn-cancelar-form {
+  background: transparent;
+  border: 1px solid #e2e6ed;
+  color: #8a9bbf;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-size: 12px;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.15s;
+}
+
+.btn-cancelar-form:hover {
+  border-color: #dc2626;
+  color: #dc2626;
+}
+
+/* ── Tarjeta de reporte ───────────────────────────────────── */
+.rep-card {
+  background: #fff;
+  border: 1px solid #e2e6ed;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 14px;
+  transition: box-shadow 0.2s;
+}
+
+.rep-card:hover { box-shadow: 0 3px 14px rgba(26,58,107,.08); }
+
+.rep-card-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  border-bottom: 1px solid #f0f2f7;
+}
+
+.rep-card-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #e8eef8;
+  flex-shrink: 0;
+}
+
+.rep-card-autor {
+  font-size: 13px;
+  font-weight: 600;
+  color: #1a2b4a;
+}
+
+.rep-card-meta {
+  font-size: 10px;
+  color: #8a9bbf;
+  margin-top: 1px;
+}
+
+.rep-card-tipo {
+  font-size: 10px;
+  padding: 3px 9px;
+  border-radius: 12px;
+  background: #e8eef8;
+  color: #1a3a6b;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.rep-card-body { padding: 12px 16px; }
+
+.rep-card-titulo {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1a2b4a;
+  margin-bottom: 6px;
+}
+
+.rep-card-desc {
+  font-size: 13px;
+  color: #5a6e8a;
+  line-height: 1.6;
+  margin-bottom: 10px;
+}
+
+.rep-card-img {
+  width: 100%;
+  max-height: 280px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #e2e6ed;
+}
+
+.rep-card-acciones {
+  display: flex;
+  gap: 8px;
+  padding: 10px 16px;
+  border-top: 1px solid #f0f2f7;
+  align-items: center;
+}
+
+.btn-like {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 12px;
+  padding: 5px 10px;
+  border-radius: 8px;
+  font-family: inherit;
+  transition: background 0.15s;
+  color: #8a9bbf;
+}
+
+.btn-like:hover { background: #fff5f5; }
+.btn-like.liked { color: #dc2626; }
+
+.btn-comentar {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: #8a9bbf;
+  font-size: 12px;
+  padding: 5px 10px;
+  border-radius: 8px;
+  font-family: inherit;
+  transition: background 0.15s;
+}
+
+.btn-comentar:hover { background: #f4f7fc; color: #1a3a6b; }
+
+.btn-compartir-x {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-left: auto;
+  background: #fff;
+  border: 1px solid #e2e6ed;
+  cursor: pointer;
+  color: #1a2b4a;
+  font-size: 11px;
+  padding: 5px 12px;
+  border-radius: 6px;
+  font-family: inherit;
+  font-weight: 500;
+  transition: all 0.15s;
+}
+
+.btn-compartir-x:hover {
+  background: #000;
+  color: #fff;
+  border-color: #000;
+}
+
+/* ── Modal comentarios ────────────────────────────────────── */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(26, 43, 74, 0.45);
+  backdrop-filter: blur(2px);
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-box {
+  background: #fff;
+  border: 1px solid #e2e6ed;
+  border-radius: 16px;
+  width: 500px;
+  max-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(26,58,107,.18);
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 18px;
+  border-bottom: 1px solid #e2e6ed;
+  background: #fafbfd;
+}
+
+.modal-header-titulo {
+  font-weight: 600;
+  font-size: 14px;
+  color: #1a2b4a;
+}
+
+.btn-cerrar-modal {
+  background: transparent;
+  border: none;
+  color: #8a9bbf;
+  cursor: pointer;
+  font-size: 18px;
+  line-height: 1;
+  padding: 2px 6px;
+  border-radius: 4px;
+  transition: all 0.15s;
+}
+
+.btn-cerrar-modal:hover { background: #f0f2f7; color: #dc2626; }
+
+.modal-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 14px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.comentario-item {
+  background: #f4f7fc;
+  border-radius: 10px;
+  padding: 10px 14px;
+  border: 1px solid #e2e6ed;
+}
+
+.comentario-texto {
+  font-size: 12px;
+  color: #1a2b4a;
+  line-height: 1.5;
+}
+
+.comentario-fecha {
+  font-size: 10px;
+  color: #b0bcd4;
+  margin-top: 5px;
+}
+
+.modal-input-row {
+  padding: 12px 18px;
+  border-top: 1px solid #e2e6ed;
+  display: flex;
+  gap: 8px;
+  background: #fafbfd;
+}
+
+.modal-input {
+  flex: 1;
+  background: #fff;
+  border: 1px solid #e2e6ed;
+  color: #1a2b4a;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 12px;
+  outline: none;
+  font-family: inherit;
+  transition: border-color 0.15s;
+}
+
+.modal-input:focus { border-color: #1a3a6b; }
+.modal-input::placeholder { color: #b0bcd4; }
+
+.btn-enviar-comentario {
+  background: #1a3a6b;
+  border: none;
+  color: #fff;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 12px;
+  font-family: inherit;
+  font-weight: 500;
+  transition: background 0.15s;
+}
+
+.btn-enviar-comentario:hover:not(:disabled) { background: #153060; }
+.btn-enviar-comentario:disabled { opacity: 0.45; cursor: not-allowed; }
+
+.modal-login-aviso {
+  padding: 14px;
+  text-align: center;
+  font-size: 12px;
+  color: #8a9bbf;
+  border-top: 1px solid #e2e6ed;
+}
+
+/* ── Panel lateral Top 3 ──────────────────────────────────── */
+.top3-item {
+  display: flex;
+  gap: 10px;
+  padding: 10px 0;
+}
+
+.top3-item + .top3-item { border-top: 1px solid #f0f2f7; }
+
+.top3-rank { font-size: 18px; min-width: 24px; flex-shrink: 0; }
+
+.top3-titulo {
+  font-size: 12px;
+  font-weight: 600;
+  color: #1a2b4a;
+  margin-bottom: 3px;
+  line-height: 1.3;
+}
+
+.top3-meta { font-size: 10px; color: #8a9bbf; }
+
+.top3-score {
+  font-size: 10px;
+  color: #1a3a6b;
+  margin-top: 5px;
+  background: #e8eef8;
+  padding: 2px 8px;
+  border-radius: 4px;
+  display: inline-block;
+  font-weight: 500;
+}
+
+/* ── Info ML ──────────────────────────────────────────────── */
+.rep-ml-info {
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  border-radius: 10px;
+  padding: 12px 14px;
+  margin-top: 12px;
+  font-size: 11px;
+  color: #15803d;
+  line-height: 1.6;
+}
+
+.rep-ml-info code {
+  background: #dcfce7;
+  padding: 1px 5px;
+  border-radius: 4px;
+  font-size: 10px;
+  color: #16a34a;
+}
