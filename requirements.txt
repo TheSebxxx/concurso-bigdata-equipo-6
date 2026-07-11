@@ -1,0 +1,8 @@
+# Ajusta las versiones a las que realmente usas en tu entorno
+pandas
+numpy
+scikit-learn
+supabase
+python-dotenv
+groq
+requests
