@@ -23,7 +23,7 @@ El proyecto se alinea con el **ODS 16 — Paz, Justicia e Instituciones Sólidas
 
 ## 3. Datos
 
-- **Fuente:** Reporte Hurto por Modalidades — Policía Nacional ([datos.gov.co](https://www.datos.gov.co)).
+- **Fuente:** Reporte Hurto por Modalidades — Policía Nacional ([datos.gov.co]([https://www.datos.gov.co](https://www.datos.gov.co/Seguridad-y-Defensa/Reporte-Hurto-por-Modalidades-Polic-a-Nacional/9vha-vh9n/about_data))).
 - **Volumen:** 633.803 registros individuales de hurto (2010-01-01 a 2026-03-01), cubriendo 1.017 municipios.
 - **Variables clave:** `DEPARTAMENTO`, `MUNICIPIO`, `CODIGO DANE`, `ARMAS MEDIOS`, `FECHA HECHO`, `TIPO DE HURTO`, `CANTIDAD`.
 - Diccionario completo → [`docs/data_dictionary.md`](docs/data_dictionary.md)
