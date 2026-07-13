@@ -3,11 +3,9 @@
 **Reto:** Seguridad Ciudadana y Justicia · **Nivel de complejidad:** Básico
 **Convocatoria:** Datos al Ecosistema 2026: IA para Colombia (MinTIC)
 
-> Sustituye el enlace de abajo por la URL pública real antes de cerrar la entrega.
-
-🔗 **Dashboard / Solución en vivo:** `https://seph-colombia.onrender.com/#`
-🎥 **Video demo:** ver `RECURSOS/demo_video.mp4`
-📊 **Pitch:** ver `RECURSOS/Informe_Tecnico_SEPH_V1.0.pdf`
+🔗 **Dashboard / Solución en vivo:** https://seph-colombia.onrender.com/#
+🎥 **Video demo:** ver `recursos/demo_video.mp4`
+📊 **Pitch:** ver `recursos/Informe_Tecnico_SEPH_V1.0.pdf`
 
 ---
 
@@ -23,7 +21,7 @@ El proyecto se alinea con el **ODS 16 — Paz, Justicia e Instituciones Sólidas
 
 ## 3. Datos
 
-- **Fuente:** Reporte Hurto por Modalidades — Policía Nacional ([datos.gov.co]([https://www.datos.gov.co])).
+- **Fuente:** Reporte Hurto por Modalidades — Policía Nacional ([datos.gov.co](https://www.datos.gov.co)).
 - **Volumen:** 633.803 registros individuales de hurto (2010-01-01 a 2026-03-01), cubriendo 1.017 municipios.
 - **Variables clave:** `DEPARTAMENTO`, `MUNICIPIO`, `CODIGO DANE`, `ARMAS MEDIOS`, `FECHA HECHO`, `TIPO DE HURTO`, `CANTIDAD`.
 - Diccionario completo → [`docs/data_dictionary.md`](docs/data_dictionary.md)
@@ -33,7 +31,7 @@ El proyecto se alinea con el **ODS 16 — Paz, Justicia e Instituciones Sólidas
 - **Metodología:** CRISP-ML(Q), 6 fases → [`docs/marco_metodologico.md`](docs/marco_metodologico.md)
 - **Modelo:** Árbol de Decisión (v1.0.0), entrenado sobre variables temporales, espaciales y contextuales, con proyección a 3 meses.
 - **Interpretabilidad:** el modelo no es una caja negra; expone los factores que más influyen en cada predicción.
-- **Asistente conversacional (SEPH):** IA + RAG sobre el dataset, predicciones y recomendaciones, con trazabilidad de fuente.
+- **Asistente conversacional (SEPH):** en lugar de un RAG dinámico, aprovechamos la amplia ventana de contexto del modelo Llama 3.3 70B en Groq. Diseñamos un prompt de sistema optimizado donde inyectamos la síntesis analítica de los 633.803 registros, garantizando respuestas inmediatas, institucionales y blindadas contra alucinaciones métricas. Ver detalle → [`docs/chatbot_rag_matriz.md`](docs/chatbot_rag_matriz.md)
 - **Arquitectura completa:** → [`docs/arquitectura.md`](docs/arquitectura.md)
 
 ## 5. Diferenciador
@@ -44,7 +42,7 @@ Módulo de **reportes ciudadanos publicables en redes sociales** (X, con proyecc
 
 - **Policía Nacional / entes territoriales:** priorización de recursos de prevención basada en zonas de riesgo.
 - **Ciudadanía:** acceso público a estadísticas, predicciones y un canal de reporte y consulta vía chatbot.
-- **Impacto territorial:** arquitectura ligera (Supabase + procesamiento por lotes), pensada para poder adaptarse a zonas con conectividad limitada.
+- **Impacto territorial:** arquitectura ligera (Supabase + procesamiento por lotes), pensada para adaptarse a zonas con conectividad limitada.
 
 Resultados, métricas y limitaciones → [`docs/conclusiones.md`](docs/conclusiones.md)
 
@@ -53,37 +51,39 @@ Resultados, métricas y limitaciones → [`docs/conclusiones.md`](docs/conclusio
 ```
 concurso-bigdata-equipo-6/
 ├── src/                          # App React/Vite (dashboard, chatbot, panel admin)
-│   ├── components/                # Chatbot.jsx, etc.
-│   ├── pages/                     # Dashboard, Estadisticas, MapaCalor, Predicciones,
-│   │                               # Recomendaciones, Reportes, admin/*
-│   └── services/                  # groqService.js, hurtosService.js, reportesService.js,
-│                                   # adminService.js, supabaseClient.js
+│   ├── components/               # Chatbot.jsx, etc.
+│   ├── pages/                    # Dashboard, Estadisticas, MapaCalor, Predicciones,
+│   │                             # Recomendaciones, Reportes, admin/*
+│   └── services/                 # groqService.js, hurtosService.js, reportesService.js,
+│                                 # adminService.js, supabaseClient.js
 ├── public/
-├── index.html, main.jsx, vite.config.js, package.json, eslint.config.js
+├── index.html, vite.config.js, package.json, eslint.config.js
 │
-├── cargar_coordenadas.py          # Script Python: geocodificación de municipios
-├── cargar_csv_supabase.py         # Script Python: ETL CSV → Supabase
-├── modelo_prediccion.py           # Script Python: modelo predictivo (Árbol de Decisión)
-├── supabase_schema_prediccion_hurtos.sql   # Esquema completo de la base de datos
-├── Reporte_Hurto_por_Modalidades_Policía_Nacional_*.csv   # Dataset original
+├── scripts/
+│   ├── cargar_coordenadas.py     # Geocodificación de municipios
+│   ├── cargar_csv_supabase.py    # ETL CSV → Supabase
+│   └── modelo_prediccion.py      # Modelo predictivo (Árbol de Decisión)
 │
-├── 02_Validacion_y_Carga.ipynb    # Notebook: validación real vs. constraints de BD
-├── 03_Modelo.ipynb                # Notebook: entrenamiento y evaluación (MAE, R²)
+├── database/
+│   └── supabase_schema_prediccion_hurtos.sql   # Esquema completo de la base de datos
 │
-├── Diagramas/                     # Fuente única de diagramas (incluye Mermaid)
+├── notebooks/
+│   ├── 02_Validacion_y_Carga.ipynb    # Validación real vs. constraints de BD
+│   └── 03_Modelo.ipynb               # Entrenamiento y evaluación (MAE, R²)
+│
+├── Diagramas/                    # Diagramas de arquitectura y flujos
 ├── docs/
 │   ├── data_dictionary.md
 │   ├── marco_metodologico.md
 │   ├── arquitectura.md
 │   ├── conclusiones.md
 │   └── chatbot_rag_matriz.md
-├── Recursos/
-│   └── Informe_Tecnico_SEPH_final.pdf
+├── recursos/
+│   ├── Informe_Tecnico_SEPH_V1.0.pdf
+│   ├── Product_Backlog_Prediccion_Hurtos_Colombia.xlsx
+│   └── mockup_prediccion_hurtos_dashboard.html
 │
-├── Product_Backlog_Prediccion_Hurtos_Colombia_...
-├── mockup_prediccion_hurtos_dashboard.html
-│
-├── .env                            # NUNCA se sube (ver .gitignore)
+├── .env                          # NUNCA se sube (ver .gitignore)
 ├── .gitignore
 ├── README.md
 ├── requirements.txt
@@ -94,18 +94,33 @@ concurso-bigdata-equipo-6/
 
 ```bash
 git clone <url-del-repo>
-cd seph
+cd concurso-bigdata-equipo-6
 pip install -r requirements.txt
+```
 
-# Variables de entorno necesarias (crear archivo .env, NO subirlo al repo):
-# SUPABASE_URL=
-# SUPABASE_KEY=
-# GROQ_API_KEY=
-# X_API_KEY / X_API_SECRET
+Variables de entorno necesarias — crear archivo `.env` en la raíz (**no subirlo al repo**):
 
-python cargar_csv_supabase.py   # Carga inicial del dataset a Supabase
-python cargar_coordenadas.py    # Geocodifica municipios (lat/lng)
-python modelo_prediccion.py     # Entrena el modelo y genera predicciones
+```
+SUPABASE_URL=
+SUPABASE_KEY=
+GROQ_API_KEY=
+X_API_KEY=
+X_API_SECRET=
+```
+
+Ejecución de scripts (en orden):
+
+```bash
+python scripts/cargar_csv_supabase.py   # Carga inicial del dataset a Supabase
+python scripts/cargar_coordenadas.py    # Geocodifica municipios (lat/lng)
+python scripts/modelo_prediccion.py     # Entrena el modelo y genera predicciones
+```
+
+Ejecución del frontend:
+
+```bash
+npm install
+npm run dev
 ```
 
 ## 9. Equipo
