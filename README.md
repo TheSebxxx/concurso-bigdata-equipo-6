@@ -3,9 +3,8 @@
 **Reto:** Seguridad Ciudadana y Justicia · **Nivel de complejidad:** Básico
 **Convocatoria:** Datos al Ecosistema 2026: IA para Colombia (MinTIC)
 
-🔗 **Dashboard / Solución en vivo:** https://seph-colombia.onrender.com/#
-🎥 **Video demo:** ver `recursos/demo_video.mp4`
-📊 **Pitch:** ver `recursos/Informe_Tecnico_SEPH_V1.0.pdf`
+ **Dashboard / Solución en vivo:** https://seph-colombia.onrender.com/#
+ **Pitch:** ver `recursos/Informe_Tecnico_SEPH_V1.0.pdf`
 
 ---
 
