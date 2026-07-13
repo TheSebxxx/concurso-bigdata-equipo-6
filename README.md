@@ -5,9 +5,9 @@
 
 > Sustituye el enlace de abajo por la URL pública real antes de cerrar la entrega.
 
-🔗 **Dashboard / Solución en vivo:** `https://<tu-enlace-de-despliegue>`
+🔗 **Dashboard / Solución en vivo:** `https://seph-colombia.onrender.com/#`
 🎥 **Video demo:** ver `RECURSOS/demo_video.mp4`
-📊 **Pitch:** ver `RECURSOS/presentacion_pitch.pdf`
+📊 **Pitch:** ver `RECURSOS/Informe_Tecnico_SEPH_V1.0.pdf`
 
 ---
 
