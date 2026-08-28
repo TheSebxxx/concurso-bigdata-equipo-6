@@ -1,6 +1,6 @@
 const GROQ_API_URL = 'https://api.groq.com/openai/v1/chat/completions'
 const GROQ_API_KEY = import.meta.env.VITE_GROQ_API_KEY
-const MODEL        = 'llama-3.3-70b-versatile'
+const MODEL        = 'llama-3.1-8b-instant'
 
 const SISTEMA_PROMPT = `Eres SEPH (Sistema Estadístico Predictivo de Hurtos), un asistente de inteligencia artificial especializado en seguridad ciudadana y prevención de hurtos en Colombia.
 
