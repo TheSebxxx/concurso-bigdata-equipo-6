@@ -1,4 +1,4 @@
-const GROQ_API_URL = 'https://api.groq.com'
+const GROQ_API_URL = 'https://api.groq.com/openai/v1/chat/completions'
 const GROQ_API_KEY = import.meta.env.VITE_GROQ_API_KEY
 const MODEL        = 'llama-3.1-8b-instant'
 
