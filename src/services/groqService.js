@@ -27,6 +27,10 @@ INSTRUCCIONES:
 - Termina cada respuesta con una recomendación accionable cuando sea pertinente`
 
 export async function enviarMensaje(mensajes) {
+  if (!GROQ_API_KEY) {
+    throw new Error('Falta la API Key de Groq. Verifica la variable VITE_GROQ_API_KEY en Render.')
+  }
+
   const response = await fetch(GROQ_API_URL, {
     method: 'POST',
     headers: {
@@ -45,8 +49,8 @@ export async function enviarMensaje(mensajes) {
   })
 
   if (!response.ok) {
-    const err = await response.json()
-    throw new Error(err.error?.message ?? 'Error al conectar con Groq')
+    const err = await response.json().catch(() => ({}))
+    throw new Error(err.error?.message ?? `Error ${response.status}: No se pudo conectar con Groq`)
   }
 
   const data = await response.json()
