@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react'
-import { enviarMensaje } from '../services/groqService'
+import { enviarMensaje } from '../services/geminiService'
 
 const SUGERENCIAS = [
   '¿Cuáles son los departamentos más peligrosos?',
@@ -23,12 +23,10 @@ export default function Chatbot() {
   const bottomRef = useRef(null)
   const inputRef  = useRef(null)
 
-  // Auto-scroll al último mensaje
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: 'smooth' })
   }, [mensajes, cargando])
 
-  // Focus al abrir
   useEffect(() => {
     if (abierto) setTimeout(() => inputRef.current?.focus(), 100)
   }, [abierto])
@@ -39,18 +37,19 @@ export default function Chatbot() {
 
     setInput('')
     setError(null)
-    setMensajes(prev => [...prev, { rol: 'user', texto: pregunta }])
+
+    const nuevosMensajes = [...mensajes, { rol: 'user', texto: pregunta }]
+    setMensajes(nuevosMensajes)
     setCargando(true)
 
     try {
-      // Construir historial para Groq (últimos 10 turnos)
-      const historial = mensajes
+      const historial = nuevosMensajes
+        .filter((_, index) => index > 0)
         .slice(-10)
         .map(m => ({
-          role:    m.rol === 'user' ? 'user' : 'assistant',
+          role: m.rol === 'user' ? 'user' : 'assistant',
           content: m.texto,
         }))
-      historial.push({ role: 'user', content: pregunta })
 
       const respuesta = await enviarMensaje(historial)
       setMensajes(prev => [...prev, { rol: 'bot', texto: respuesta }])
@@ -67,7 +66,6 @@ export default function Chatbot() {
   }
 
   function renderTexto(texto) {
-    // Soporte básico de markdown: **negrita**
     return texto.split('**').map((parte, i) =>
       i % 2 === 1
         ? <strong key={i}>{parte}</strong>
@@ -77,7 +75,6 @@ export default function Chatbot() {
 
   return (
     <>
-      {/* ── Botón flotante ── */}
       <button
         onClick={() => setAbierto(v => !v)}
         style={{
@@ -94,7 +91,6 @@ export default function Chatbot() {
         {abierto ? '✕' : '🤖'}
       </button>
 
-      {/* ── Panel del chat ── */}
       {abierto && (
         <div style={{
           position:'fixed', bottom:'90px', right:'24px', zIndex:999,
@@ -118,7 +114,7 @@ export default function Chatbot() {
             <div>
               <div style={{fontSize:'13px', fontWeight:700, color:'#f1f5f9'}}>SEPH IA</div>
               <div style={{fontSize:'10px', color:'#93c5fd'}}>
-                {cargando ? '⏳ Escribiendo...' : '🟢 En línea · Groq llama-3.3-70b'}
+                {cargando ? '⏳ Escribiendo...' : '🟢 En línea · Gemini 1.5 Flash'}
               </div>
             </div>
           </div>
@@ -149,7 +145,6 @@ export default function Chatbot() {
               </div>
             ))}
 
-            {/* Indicador de escritura */}
             {cargando && (
               <div style={{display:'flex', justifyContent:'flex-start'}}>
                 <div style={{
@@ -166,7 +161,7 @@ export default function Chatbot() {
             <div ref={bottomRef} />
           </div>
 
-          {/* Sugerencias (solo al inicio) */}
+          {/* Sugerencias */}
           {mensajes.length === 1 && (
             <div style={{
               padding:'0 12px 8px',
