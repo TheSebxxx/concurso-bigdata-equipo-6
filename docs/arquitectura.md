@@ -6,7 +6,7 @@
 |---|---|---|
 | Persistencia de datos | PostgreSQL en Supabase | Fuente de verdad única: dataset normalizado, predicciones, recomendaciones, reportes y administración. |
 | Procesamiento predictivo | Python (scikit-learn — Árbol de Decisión) | Entrenamiento del modelo, cálculo de proyecciones a 3 meses y niveles de confianza. |
-| Asistente conversacional | Groq API (`llama-3.3-70b-versatile`) + prompt de sistema con conocimiento embebido | Respuestas de SEPH basadas en cifras agregadas y recomendaciones escritas en el prompt (no consulta Supabase por pregunta — ver `chatbot_rag_matriz.md`). |
+| Asistente conversacional | Gemini API (`gemini 3.6 flash`) + prompt de sistema con conocimiento embebido | Respuestas de SEPH basadas en cifras agregadas y recomendaciones escritas en el prompt (no consulta Supabase por pregunta — ver `chatbot_rag_matriz.md`). |
 | Redes sociales | API de X (proyección Facebook/Instagram) | Publicación y difusión de reportes ciudadanos de hurto. |
 | Autenticación administrativa | JWT + tabla `admins` | Control de acceso por rol (`superadmin` / `admin`) a la ruta `/admin`. |
 
@@ -33,7 +33,7 @@ La plataforma se divide en dos árboles de navegación sobre la misma base de da
 
 ## 4.1 Interacción con el chatbot (diagrama de secuencia)
 
-Complementa el flujo descrito en [`chatbot_rag_matriz.md`](chatbot_rag_matriz.md): pregunta del ciudadano → historial de conversación + prompt de sistema con conocimiento embebido → respuesta generada por Groq. **Nota:** el diagrama fue creado originalmente asumiendo una arquitectura RAG; revisar si el diagrama de secuencia en `Diagramas/` todavía muestra un paso de "consulta a Supabase" antes de la respuesta — de ser así, el diagrama no coincide con el código real y debería actualizarse o aclararse en la sustentación.
+Complementa el flujo descrito en [`chatbot_rag_matriz.md`](chatbot_rag_matriz.md): pregunta del ciudadano → historial de conversación + prompt de sistema con conocimiento embebido → respuesta generada por Gemini. **Nota:** el diagrama fue creado originalmente asumiendo una arquitectura RAG; revisar si el diagrama de secuencia en `Diagramas/` todavía muestra un paso de "consulta a Supabase" antes de la respuesta — de ser así, el diagrama no coincide con el código real y debería actualizarse o aclararse en la sustentación.
 
 ![Secuencia de interacción con el chatbot IA](../Diagramas/secuencia_chatbot.png)
 
