@@ -3,7 +3,7 @@
 **Reto:** Seguridad Ciudadana y Justicia · **Nivel de complejidad:** Básico
 **Convocatoria:** Datos al Ecosistema 2026: IA para Colombia (MinTIC)
 
- **Dashboard / Solución en vivo:** https://seph-colombia.onrender.com/#
+ **Dashboard / Solución en vivo:** https://seph.onrender.com/#
  **Pitch:** ver `recursos/Informe_Tecnico_SEPH_V1.0.pdf`
 
 ---
@@ -30,7 +30,7 @@ El proyecto se alinea con el **ODS 16 — Paz, Justicia e Instituciones Sólidas
 - **Metodología:** CRISP-ML(Q), 6 fases → [`docs/marco_metodologico.md`](docs/marco_metodologico.md)
 - **Modelo:** Árbol de Decisión (v1.0.0), entrenado sobre variables temporales, espaciales y contextuales, con proyección a 3 meses.
 - **Interpretabilidad:** el modelo no es una caja negra; expone los factores que más influyen en cada predicción.
-- **Asistente conversacional (SEPH):** en lugar de un RAG dinámico, aprovechamos la amplia ventana de contexto del modelo Llama 3.3 70B en Groq. Diseñamos un prompt de sistema optimizado donde inyectamos la síntesis analítica de los 633.803 registros, garantizando respuestas inmediatas, institucionales y blindadas contra alucinaciones métricas. Ver detalle → [`docs/chatbot_rag_matriz.md`](docs/chatbot_rag_matriz.md)
+- **Asistente conversacional (SEPH):** en lugar de un RAG dinámico, aprovechamos la amplia ventana de contexto del modelo Llama Gemini 3.6 flash. Diseñamos un prompt de sistema optimizado donde inyectamos la síntesis analítica de los 633.803 registros, garantizando respuestas inmediatas, institucionales y blindadas contra alucinaciones métricas. Ver detalle → [`docs/chatbot_rag_matriz.md`](docs/chatbot_rag_matriz.md)
 - **Arquitectura completa:** → [`docs/arquitectura.md`](docs/arquitectura.md)
 
 ## 5. Diferenciador
