@@ -114,7 +114,11 @@ export default function Chatbot() {
             <div>
               <div style={{fontSize:'13px', fontWeight:700, color:'#f1f5f9'}}>SEPH IA</div>
               <div style={{fontSize:'10px', color:'#93c5fd'}}>
+<<<<<<< HEAD
                 {cargando ? '⏳ Escribiendo...' : '🟢 En línea · Gemini 1.5 Flash'}
+=======
+                {cargando ? '⏳ Escribiendo...' : '🟢 En línea · Gemini 3.6 Flash'}
+>>>>>>> 3c8b9b65b2a352669ac7e792f47a9d14f8e88a3c
               </div>
             </div>
           </div>
