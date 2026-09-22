@@ -2,16 +2,16 @@
 
 ## ⚠️ Corrección de diseño frente a versiones anteriores de este documento
 
-Versiones previas de esta documentación describían a SEPH como un sistema **RAG (Recuperación Aumentada por Generación)**, que consultaría Supabase en tiempo real antes de cada respuesta. **Al revisar el código real (`groqService.js` y `Chatbot.jsx`), esto no es así.** Se corrige aquí para que la documentación sea fiel a la implementación.
+Versiones previas de esta documentación describían a SEPH como un sistema **RAG (Recuperación Aumentada por Generación)**, que consultaría Supabase en tiempo real antes de cada respuesta. **Al revisar el código real (`geminiService.js` y `Chatbot.jsx`), esto no es así.** Se corrige aquí para que la documentación sea fiel a la implementación.
 
 ## 1. Arquitectura real
 
-SEPH es un chatbot basado en un **prompt de sistema con conocimiento de dominio embebido** (`SISTEMA_PROMPT` en `groqService.js`), no en recuperación dinámica:
+SEPH es un chatbot basado en un **prompt de sistema con conocimiento de dominio embebido** (`SISTEMA_PROMPT` en `geminiService.js`), no en recuperación dinámica:
 
 1. El usuario escribe una pregunta en `Chatbot.jsx`.
 2. Se arma el historial de los últimos 10 turnos de la conversación (sin consultar la base de datos).
-3. `enviarMensaje()` antepone un `SISTEMA_PROMPT` **fijo y escrito a mano** — contiene cifras agregadas del dataset (registros totales, tipos de hurto, modalidades, departamentos/municipios) y una lista de recomendaciones preventivas predefinidas — y envía todo directamente a la API de Groq (`llama-3.3-70b-versatile`).
-4. Groq genera la respuesta con base en ese prompt + el historial de conversación. **No hay ninguna consulta a Supabase en este flujo.**
+3. `enviarMensaje()` antepone un `SISTEMA_PROMPT` **fijo y escrito a mano** — contiene cifras agregadas del dataset (registros totales, tipos de hurto, modalidades, departamentos/municipios) y una lista de recomendaciones preventivas predefinidas — y envía todo directamente a la API de Gemini (`gemini 3.6 flash`).
+4. Gemini genera la respuesta con base en ese prompt + el historial de conversación. **No hay ninguna consulta a Supabase en este flujo.**
 
 Es decir: SEPH no recupera evidencia por pregunta ni cita filas específicas de `registros_hurto`, `predicciones` o `recomendaciones` — responde con base en el conocimiento general que se le dio una sola vez, al momento de escribir el prompt.
 
@@ -38,7 +38,7 @@ El `SISTEMA_PROMPT` actual contiene, entre otros datos fijos:
 
 ## 4. Trazabilidad real (ajustada)
 
-A diferencia de un sistema RAG, **no es posible vincular una respuesta específica a una fila concreta de la base de datos**, porque no hay consulta por pregunta. Lo que sí es trazable es el propio `SISTEMA_PROMPT` como artefacto versionado en el repositorio (`src/services/groqService.js`): cualquier persona puede leer exactamente qué conocimiento se le dio al modelo y qué instrucciones sigue.
+A diferencia de un sistema RAG, **no es posible vincular una respuesta específica a una fila concreta de la base de datos**, porque no hay consulta por pregunta. Lo que sí es trazable es el propio `SISTEMA_PROMPT` como artefacto versionado en el repositorio (`src/services/geminiService.js`): cualquier persona puede leer exactamente qué conocimiento se le dio al modelo y qué instrucciones sigue.
 
 ## 5. Retroalimentación
 
@@ -48,7 +48,7 @@ La interfaz administrativa incluye una vista de calificaciones del chatbot (`Adm
 
 Para acercar SEPH a una arquitectura RAG real antes de futuras iteraciones del proyecto:
 
-1. Antes de llamar a Groq, ejecutar una consulta rápida a Supabase según palabras clave de la pregunta (municipio mencionado, tipo de hurto, etc.) y **agregar esos resultados al mensaje** enviado a Groq como contexto adicional (no reemplazar el `SISTEMA_PROMPT`, sino complementarlo por turno).
+1. Antes de llamar a Gemini, ejecutar una consulta rápida a Supabase según palabras clave de la pregunta (municipio mencionado, tipo de hurto, etc.) y **agregar esos resultados al mensaje** enviado a Gemini como contexto adicional (no reemplazar el `SISTEMA_PROMPT`, sino complementarlo por turno).
 2. Generar las cifras agregadas del prompt (`381.624 registros...`, etc.) dinámicamente en cada carga del dataset, en vez de escribirlas a mano en el código — por ejemplo, calculándolas en `cargar_csv_supabase.py` al final de la ingesta y guardándolas en una tabla de configuración que el frontend consulte.
 
 ## 7. Corrección de alcance en el resto de la documentación
