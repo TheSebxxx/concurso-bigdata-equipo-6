@@ -1,6 +1,6 @@
 # Chatbot SEPH — arquitectura real y matriz de alineación
 
-## ⚠️ Corrección de diseño frente a versiones anteriores de este documento
+## Corrección de diseño frente a versiones anteriores de este documento
 
 Versiones previas de esta documentación describían a SEPH como un sistema **RAG (Recuperación Aumentada por Generación)**, que consultaría Supabase en tiempo real antes de cada respuesta. **Al revisar el código real (`geminiService.js` y `Chatbot.jsx`), esto no es así.** Se corrige aquí para que la documentación sea fiel a la implementación.
 
@@ -28,7 +28,7 @@ El `SISTEMA_PROMPT` actual contiene, entre otros datos fijos:
 
 **Cada vez que se recargue el dataset (re-entrenamiento mensual, ver `marco_metodologico.md` Fase 6), este texto seguirá diciendo lo mismo hasta que alguien lo edite manualmente en el código.** Es una limitación real de mantenimiento, no solo un detalle cosmético.
 
-## 3. Lo que el chatbot SÍ hace bien (vale la pena resaltarlo ante el jurado)
+## 3. Lo que el chatbot SÍ hace bien 
 
 - El prompt instruye explícitamente: *"No inventes cifras específicas que no conozcas — di que no cuentas con ese dato exacto"* — una salvaguarda real contra alucinaciones, aunque no basada en recuperación de evidencia.
 - Redirige a la línea 123 en situaciones de emergencia.
@@ -36,7 +36,7 @@ El `SISTEMA_PROMPT` actual contiene, entre otros datos fijos:
 - Mantiene historial conversacional (últimos 10 turnos) para dar continuidad a la conversación.
 - Responde siempre en español y con longitud acotada (150 palabras), lo que es apropiado para una interfaz de chat flotante.
 
-## 4. Trazabilidad real (ajustada)
+## 4. Trazabilidad real 
 
 A diferencia de un sistema RAG, **no es posible vincular una respuesta específica a una fila concreta de la base de datos**, porque no hay consulta por pregunta. Lo que sí es trazable es el propio `SISTEMA_PROMPT` como artefacto versionado en el repositorio (`src/services/geminiService.js`): cualquier persona puede leer exactamente qué conocimiento se le dio al modelo y qué instrucciones sigue.
 
