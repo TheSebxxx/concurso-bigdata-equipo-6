@@ -6,7 +6,6 @@ export const VisitorStatsCard = () => {
   const [totalViews, setTotalViews] = useState(0);
   const [chartData, setChartData] = useState([]);
 
-  // Cargar estadísticas iniciales
   const fetchViews = async () => {
     const { data, count, error } = await supabase
       .from('page_views')
@@ -15,7 +14,6 @@ export const VisitorStatsCard = () => {
     if (!error && data) {
       setTotalViews(count || data.length);
       
-      // Agrupar vistas por hora o día para la gráfica
       const grouped = data.reduce((acc, curr) => {
         const date = new Date(curr.viewed_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
         acc[date] = (acc[date] || 0) + 1;
@@ -27,18 +25,17 @@ export const VisitorStatsCard = () => {
         vistas: grouped[time]
       }));
 
-      setChartData(formattedData.slice(-10)); // Mostrar las últimas 10 franjas de tiempo
+      setChartData(formattedData.slice(-8));
     }
   };
 
   useEffect(() => {
     fetchViews();
 
-    // Suscripción en Tiempo Real
     const subscription = supabase
       .channel('realtime_page_views')
       .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'page_views' }, () => {
-        fetchViews(); // Recargar contador y gráfica cuando entra un usuario nuevo
+        fetchViews();
       })
       .subscribe();
 
@@ -48,25 +45,42 @@ export const VisitorStatsCard = () => {
   }, []);
 
   return (
-    <div className="bg-white p-6 rounded-2xl shadow-md border border-gray-100 flex flex-col justify-between">
-      <div className="flex justify-between items-center mb-4">
+    <div style={{
+      backgroundColor: '#ffffff',
+      borderRadius: '12px',
+      padding: '20px',
+      boxShadow: '0 2px 10px rgba(0,0,0,0.05)',
+      border: '1px solid #e2e6ed',
+      marginBottom: '20px'
+    }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
         <div>
-          <h3 className="text-gray-500 text-sm font-medium">Vistas Totales de SEPH</h3>
-          <p className="text-3xl font-bold text-gray-900 mt-1">{totalViews}</p>
+          <span style={{ fontSize: '12px', fontWeight: 'bold', color: '#6b7280', textTransform: 'uppercase' }}>
+            Vistas Totales en Tiempo Real
+          </span>
+          <div style={{ fontSize: '28px', fontWeight: 'bold', color: '#111827', marginTop: '4px' }}>
+            {totalViews}
+          </div>
         </div>
-        <span className="flex h-3 w-3 relative">
-          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-          <span className="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
-        </span>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <span style={{
+            height: '10px',
+            width: '10px',
+            backgroundColor: '#10b981',
+            borderRadius: '50%',
+            display: 'inline-block'
+          }}></span>
+          <span style={{ fontSize: '12px', color: '#10b981', fontWeight: 'bold' }}>En Vivo</span>
+        </div>
       </div>
 
-      <div className="h-32 w-full mt-2">
+      <div style={{ width: '100%', height: '100px' }}>
         <ResponsiveContainer width="100%" height="100%">
           <LineChart data={chartData}>
-            <XAxis dataKey="time" stroke="#9CA3AF" fontSize={10} />
-            <YAxis allowDecimals={false} stroke="#9CA3AF" fontSize={10} />
+            <XAxis dataKey="time" stroke="#9ca3af" fontSize={10} />
+            <YAxis allowDecimals={false} stroke="#9ca3af" fontSize={10} />
             <Tooltip />
-            <Line type="monotone" dataKey="vistas" stroke="#2563EB" strokeWidth={2} dot={{ r: 3 }} />
+            <Line type="monotone" dataKey="vistas" stroke="#2563eb" strokeWidth={2} dot={{ r: 3 }} />
           </LineChart>
         </ResponsiveContainer>
       </div>

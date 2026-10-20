@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { getKPIs, getRankingMunicipios } from '../services/hurtosService'
+import { VisitorStatsCard } from '../components/VisitorStatsCard'
 import './Dashboard.css'
 
 export default function Dashboard() {
@@ -33,7 +34,7 @@ export default function Dashboard() {
 
   return (
     <div>
-      {/* Encabezado */}
+      {/* Encabezado del Dashboard */}
       <div className="dashboard-header">
         <div>
           <h1 className="dashboard-title">Dashboard — Hurtos en Colombia</h1>
@@ -43,7 +44,10 @@ export default function Dashboard() {
         </div>
       </div>
 
-      {/* KPIs */}
+      {/* Tarjeta del Contador de Visitas en Tiempo Real */}
+      <VisitorStatsCard />
+
+      {/* Métricas Principales (KPIs) */}
       <div className="kpi-grid">
         <div className="kpi-card">
           <div className="kpi-label">Total hurtos registrados</div>
@@ -74,7 +78,7 @@ export default function Dashboard() {
         </div>
       </div>
 
-      {/* Filtros */}
+      {/* Filtros de la tabla */}
       <div className="filter-row">
         <button
           className={`filter-chip ${!filtro ? 'active' : ''}`}
@@ -96,10 +100,10 @@ export default function Dashboard() {
         </button>
       </div>
 
-      {/* Tabla ranking */}
+      {/* Tabla del ranking de municipios */}
       <div className="card">
         <div className="card-header">
-          <span className="card-title"> Top 200 municipios por hurtos</span>
+          <span className="card-title">Top 200 municipios por hurtos</span>
           <span className="ranking-count">{ranking.length} registros</span>
         </div>
         <div className="ranking-scroll">
