@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { BrowserRouter, Routes, Route, NavLink } from 'react-router-dom'
 import Dashboard       from './pages/Dashboard'
 import Recomendaciones from './pages/Recomendaciones'
@@ -18,18 +18,31 @@ export default function App() {
   // Registrar automáticamente la visita en Supabase
   usePageView();
 
+  // Estado para controlar el menú móvil
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const toggleMenu = () => setMenuOpen(!menuOpen);
+  const closeMenu = () => setMenuOpen(false);
+
   return (
     <BrowserRouter>
       <div className="app-layout">
 
-        <aside className="sidebar">
-          <div className="logo" style={{
-            padding: '16px',
-            borderBottom: '1px solid #e2e6ed',
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}>
+        {/* Encabezado móvil con botón de menú hamburguesa */}
+        <header className="mobile-header">
+          <img
+            src="/Logo_SEPH.png"
+            alt="Logo SEPH"
+            className="mobile-logo"
+          />
+          <button className="menu-toggle-btn" onClick={toggleMenu} aria-label="Abrir menú">
+            {menuOpen ? '✕' : '☰'}
+          </button>
+        </header>
+
+        {/* Sidebar / Menú lateral (se convierte en desplegable en móviles) */}
+        <aside className={`sidebar ${menuOpen ? 'open' : ''}`}>
+          <div className="logo sidebar-logo">
             <img
               src="/Logo_SEPH.png"
               alt="Logo SEPH Colombia"
@@ -39,40 +52,43 @@ export default function App() {
 
           <nav style={{ flex: 1, paddingTop: '8px' }}>
             <p className="nav-section-label">Principal</p>
-            <NavLink to="/"
+            <NavLink to="/" onClick={closeMenu}
               className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}>
                Dashboard
             </NavLink>
-            <NavLink to="/mapa"
+            <NavLink to="/mapa" onClick={closeMenu}
               className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}>
                Mapa de Calor
             </NavLink>
-            <NavLink to="/predicciones"
+            <NavLink to="/predicciones" onClick={closeMenu}
               className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}>
                Predicciones
             </NavLink>
-            <NavLink to="/estadisticas"
+            <NavLink to="/estadisticas" onClick={closeMenu}
               className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}>
                Estadísticas
             </NavLink>
 
             <p className="nav-section-label" style={{ marginTop: '8px' }}>Ciudadanía</p>
-            <NavLink to="/reportes"
+            <NavLink to="/reportes" onClick={closeMenu}
               className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}>
                Reportes
             </NavLink>
-            <NavLink to="/recomendaciones"
+            <NavLink to="/recomendaciones" onClick={closeMenu}
               className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}>
                Recomendaciones
             </NavLink>
 
             <p className="nav-section-label" style={{ marginTop: '8px' }}>Gestión</p>
-            <NavLink to="/admin"
+            <NavLink to="/admin" onClick={closeMenu}
               className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}>
                Panel Admin
             </NavLink>
           </nav>
         </aside>
+
+        {/* Overlay oscuro para cerrar el menú al hacer clic afuera en móviles */}
+        {menuOpen && <div className="menu-overlay" onClick={closeMenu}></div>}
 
         <main className="main-content">
           <Routes>

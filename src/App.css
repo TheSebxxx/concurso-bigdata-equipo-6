@@ -409,3 +409,87 @@ input::placeholder { color: #b0bcd4; }
     grid-template-columns: 1fr !important; /* 1 columna en móvil */
   }
 }
+
+/* Ocultar elementos móviles en versión de escritorio */
+.mobile-header, .menu-overlay {
+  display: none;
+}
+
+/* ==========================================
+   ESTILOS RESPONSIVOS PARA MÓVILES (≤ 768px)
+   ========================================== */
+@media (max-width: 768px) {
+  .app-layout {
+    flex-direction: column !important;
+  }
+
+  /* Encabezado fijo superior en móviles */
+  .mobile-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 16px;
+    background-color: #ffffff;
+    border-bottom: 1px solid #e2e6ed;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .mobile-logo {
+    height: 36px;
+    width: auto;
+  }
+
+  .menu-toggle-btn {
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: #1a3a6b;
+    cursor: pointer;
+    padding: 4px 8px;
+  }
+
+  /* Ocultar el logo interno del sidebar en móvil */
+  .sidebar-logo {
+    display: none !important;
+  }
+
+  /* Transformar el sidebar en un menú desplegable lateral deslizable */
+  .sidebar {
+    position: fixed;
+    top: 57px;
+    left: -100%;
+    width: 250px !important;
+    height: calc(100vh - 57px);
+    background-color: #ffffff;
+    z-index: 99;
+    transition: left 0.3s ease-in-out;
+    box-shadow: 4px 0 12px rgba(0,0,0,0.1);
+    overflow-y: auto;
+  }
+
+  /* Cuando el menú está abierto */
+  .sidebar.open {
+    left: 0 !important;
+  }
+
+  /* Fondo semitransparente al abrir menú */
+  .menu-overlay {
+    display: block;
+    position: fixed;
+    top: 57px;
+    left: 0;
+    width: 100vw;
+    height: calc(100vh - 57px);
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 98;
+  }
+
+  /* El contenido principal toma el 100% del ancho */
+  .main-content {
+    width: 100% !important;
+    padding: 12px !important;
+    box-sizing: border-box;
+  }
+}
