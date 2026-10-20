@@ -385,3 +385,27 @@ input::placeholder { color: #b0bcd4; }
 }
 
 .card, .kpi-card { animation: fadeIn 0.3s ease both; }
+
+/* Estilos para teléfonos móviles */
+@media (max-width: 768px) {
+  .app-layout {
+    flex-direction: column !important;
+  }
+
+  .sidebar {
+    width: 100% !important;
+    min-width: 100% !important;
+    border-right: none !important;
+    border-bottom: 1px solid #e2e6ed;
+    padding-bottom: 10px;
+  }
+
+  .main-content {
+    padding: 12px !important;
+    width: 100% !important;
+  }
+
+  .kpi-grid {
+    grid-template-columns: 1fr !important; /* 1 columna en móvil */
+  }
+}

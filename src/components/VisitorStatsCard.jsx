@@ -26,7 +26,7 @@ export function VisitorStatsCard() {
           vistas: grouped[time]
         }));
 
-        setChartData(formattedData.slice(-8));
+        setChartData(formattedData.slice(-6));
       }
     } catch (err) {
       console.error("Error cargando vistas:", err);
@@ -52,24 +52,33 @@ export function VisitorStatsCard() {
     <div style={{
       backgroundColor: '#ffffff',
       borderRadius: '12px',
-      padding: '20px',
+      padding: '16px',
       boxShadow: '0 2px 10px rgba(0,0,0,0.05)',
       border: '1px solid #e2e6ed',
-      marginBottom: '20px'
+      marginBottom: '20px',
+      width: '100%',
+      boxSizing: 'border-box'
     }}>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
+      <div style={{ 
+        display: 'flex', 
+        justifyContent: 'space-between', 
+        alignItems: 'center', 
+        flexWrap: 'wrap',
+        gap: '8px',
+        marginBottom: '12px' 
+      }}>
         <div>
-          <span style={{ fontSize: '12px', fontWeight: 'bold', color: '#6b7280', textTransform: 'uppercase' }}>
-            Vistas Totales en Tiempo Real
+          <span style={{ fontSize: '11px', fontWeight: 'bold', color: '#6b7280', textTransform: 'uppercase' }}>
+            Vistas en Tiempo Real
           </span>
-          <div style={{ fontSize: '28px', fontWeight: 'bold', color: '#111827', marginTop: '4px' }}>
+          <div style={{ fontSize: '24px', fontWeight: 'bold', color: '#111827', marginTop: '2px' }}>
             {totalViews}
           </div>
         </div>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
           <span style={{
-            height: '10px',
-            width: '10px',
+            height: '8px',
+            width: '8px',
             backgroundColor: '#10b981',
             borderRadius: '50%',
             display: 'inline-block'
@@ -78,13 +87,13 @@ export function VisitorStatsCard() {
         </div>
       </div>
 
-      <div style={{ width: '100%', height: '100px' }}>
+      <div style={{ width: '100%', height: '80px', minWidth: '0' }}>
         <ResponsiveContainer width="100%" height="100%">
           <LineChart data={chartData}>
-            <XAxis dataKey="time" stroke="#9ca3af" fontSize={10} />
-            <YAxis allowDecimals={false} stroke="#9ca3af" fontSize={10} />
+            <XAxis dataKey="time" stroke="#9ca3af" fontSize={9} />
+            <YAxis allowDecimals={false} stroke="#9ca3af" fontSize={9} width={20} />
             <Tooltip />
-            <Line type="monotone" dataKey="vistas" stroke="#2563eb" strokeWidth={2} dot={{ r: 3 }} />
+            <Line type="monotone" dataKey="vistas" stroke="#2563eb" strokeWidth={2} dot={{ r: 2 }} />
           </LineChart>
         </ResponsiveContainer>
       </div>
