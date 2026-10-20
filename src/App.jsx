@@ -9,14 +9,13 @@ import Chatbot         from './components/Chatbot'
 import Reportes        from './pages/Reportes'
 import Admin           from './pages/admin/Admin'
 
-// Hook y Componente del Contador de Visitas en Tiempo Real
+// Hook del Contador de Visitas
 import { usePageView } from './hooks/usePageView'
-import { VisitorStatsCard } from './components/VisitorStatsCard'
 
 import './App.css'
 
 export default function App() {
-  // Registrar automáticamente cada visita al cargar/navegar en la app
+  // Registrar automáticamente la visita en Supabase
   usePageView();
 
   return (
@@ -24,7 +23,6 @@ export default function App() {
       <div className="app-layout">
 
         <aside className="sidebar">
-          {/* Brand / Logo — solo imagen, más grande */}
           <div className="logo" style={{
             padding: '16px',
             borderBottom: '1px solid #e2e6ed',
@@ -68,18 +66,12 @@ export default function App() {
                Recomendaciones
             </NavLink>
 
-            {/* 🔐 NUEVA SECCIÓN DE ADMINISTRACIÓN ADICIONADA */}
             <p className="nav-section-label" style={{ marginTop: '8px' }}>Gestión</p>
             <NavLink to="/admin"
               className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}>
                Panel Admin
             </NavLink>
           </nav>
-
-          {/* Tarjeta del Contador de Visitas en Tiempo Real colocada al final del Sidebar */}
-          <div style={{ padding: '12px' }}>
-            <VisitorStatsCard />
-          </div>
         </aside>
 
         <main className="main-content">

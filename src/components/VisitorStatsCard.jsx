@@ -2,30 +2,34 @@ import React, { useEffect, useState } from 'react';
 import { supabase } from '../services/supabaseClient';
 import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
 
-export const VisitorStatsCard = () => {
+export function VisitorStatsCard() {
   const [totalViews, setTotalViews] = useState(0);
   const [chartData, setChartData] = useState([]);
 
   const fetchViews = async () => {
-    const { data, count, error } = await supabase
-      .from('page_views')
-      .select('*', { count: 'exact' });
+    try {
+      const { data, count, error } = await supabase
+        .from('page_views')
+        .select('*', { count: 'exact' });
 
-    if (!error && data) {
-      setTotalViews(count || data.length);
-      
-      const grouped = data.reduce((acc, curr) => {
-        const date = new Date(curr.viewed_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-        acc[date] = (acc[date] || 0) + 1;
-        return acc;
-      }, {});
+      if (!error && data) {
+        setTotalViews(count || data.length);
+        
+        const grouped = data.reduce((acc, curr) => {
+          const date = new Date(curr.viewed_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+          acc[date] = (acc[date] || 0) + 1;
+          return acc;
+        }, {});
 
-      const formattedData = Object.keys(grouped).map(time => ({
-        time,
-        vistas: grouped[time]
-      }));
+        const formattedData = Object.keys(grouped).map(time => ({
+          time,
+          vistas: grouped[time]
+        }));
 
-      setChartData(formattedData.slice(-8));
+        setChartData(formattedData.slice(-8));
+      }
+    } catch (err) {
+      console.error("Error cargando vistas:", err);
     }
   };
 
@@ -86,4 +90,4 @@ export const VisitorStatsCard = () => {
       </div>
     </div>
   );
-};
+}
