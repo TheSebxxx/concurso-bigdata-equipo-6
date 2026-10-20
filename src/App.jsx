@@ -1,3 +1,4 @@
+import React from 'react'
 import { BrowserRouter, Routes, Route, NavLink } from 'react-router-dom'
 import Dashboard       from './pages/Dashboard'
 import Recomendaciones from './pages/Recomendaciones'
@@ -7,9 +8,17 @@ import Predicciones    from './pages/Predicciones'
 import Chatbot         from './components/Chatbot'
 import Reportes        from './pages/Reportes'
 import Admin           from './pages/admin/Admin'
+
+// Hook y Componente del Contador de Visitas en Tiempo Real
+import { usePageView } from './hooks/usePageView'
+import { VisitorStatsCard } from './components/VisitorStatsCard'
+
 import './App.css'
 
 export default function App() {
+  // Registrar automáticamente cada visita al cargar/navegar en la app
+  usePageView();
+
   return (
     <BrowserRouter>
       <div className="app-layout">
@@ -66,12 +75,17 @@ export default function App() {
                Panel Admin
             </NavLink>
           </nav>
+
+          {/* Tarjeta del Contador de Visitas en Tiempo Real colocada al final del Sidebar */}
+          <div style={{ padding: '12px' }}>
+            <VisitorStatsCard />
+          </div>
         </aside>
 
         <main className="main-content">
           <Routes>
-            <Route path="/"                element={<Dashboard />} />
-            <Route path="/mapa"            element={<MapaCalor />} />
+            <Route path="/"           element={<Dashboard />} />
+            <Route path="/mapa"           element={<MapaCalor />} />
             <Route path="/predicciones"    element={<Predicciones />} />
             <Route path="/estadisticas"    element={<Estadisticas />} />
             <Route path="/recomendaciones" element={<Recomendaciones />} />
