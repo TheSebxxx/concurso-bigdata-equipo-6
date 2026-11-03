@@ -29,7 +29,7 @@ La plataforma se divide en dos árboles de navegación sobre la misma base de da
 - **Pública/ciudadana:** inicio → dashboard general → mapa de calor (histórico/predictivo) → estadísticas e informes → reportes ciudadanos → recomendaciones → chatbot flotante SEPH.
 - **Administrativa:** login (JWT contra `admins`) → panel de administración → gestión de usuarios, recomendaciones, dataset, predicciones, feedback del chatbot y moderación de reportes.
 
-![Mapa de navegación](../Diagramas/navegacion.png)
+![Mapa de navegación](../Diagramas/![Mapa de navegación](../Diagramas/Diagramas/Diagrama de Navegación (SEPH).png))
 
 ## 4.1 Interacción con el chatbot (diagrama de secuencia)
 
