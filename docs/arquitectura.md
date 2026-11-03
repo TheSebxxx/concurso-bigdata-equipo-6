@@ -35,7 +35,7 @@ La plataforma se divide en dos árboles de navegación sobre la misma base de da
 
 Complementa el flujo descrito en [`chatbot_rag_matriz.md`](chatbot_rag_matriz.md): pregunta del ciudadano → historial de conversación + prompt de sistema con conocimiento embebido → respuesta generada por Gemini. **Nota:** el diagrama fue creado originalmente asumiendo una arquitectura RAG; revisar si el diagrama de secuencia en `Diagramas/` todavía muestra un paso de "consulta a Supabase" antes de la respuesta — de ser así, el diagrama no coincide con el código real y debería actualizarse o aclararse en la sustentación.
 
-![Secuencia de interacción con el chatbot IA](../Diagramas/secuencia_chatbot.png)
+![Secuencia de interacción con el chatbot IA](../Diagramas/Diagrama_de_Secuencia.jpeg)
 
 ## 5. Panel administrativo y control de roles
 
