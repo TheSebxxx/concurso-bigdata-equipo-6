@@ -42,7 +42,7 @@ A diferencia de un sistema RAG, **no es posible vincular una respuesta específi
 
 ## 5. Retroalimentación
 
-La interfaz administrativa incluye una vista de calificaciones del chatbot (`AdminFeedback.jsx`). **No se ha verificado aún el código de captura de esas calificaciones** (`adminService.js` no ha sido revisado en este documento) — pendiente de confirmar si el 👍/👎 se guarda y desde dónde se consulta.
+La interfaz de gestión administrativa incorpora una vista de calificaciones del chatbot (AdminFeedback.jsx). La persistencia y captura de dichas evaluaciones (adminService.js) se mantiene como un punto pendiente de auditoría exhaustiva en la documentación para confirmar la correcta escritura y consulta de las métricas de satisfacción ciudadana.
 
 ## 6. Mejora recomendada (trabajo futuro, no implementada por restricciones de tiempo)
 
@@ -53,8 +53,10 @@ Para acercar SEPH a una arquitectura RAG real antes de futuras iteraciones del p
 
 ## 7. Corrección de alcance en el resto de la documentación
 
-Se corrigen las siguientes menciones a "RAG" en otros documentos de este repositorio, por ser inexactas:
+Se procede a rectificar y unificar las menciones erróneas al término "RAG" en los siguientes entregables del proyecto para garantizar coherencia institucional:
 
-- `README.md`, sección 4 (Solución / Modelo de IA)
-- `docs/arquitectura.md`, tabla de stack tecnológico
-- `docs/marco_metodologico.md`, Fase 5 (Despliegue)
+README.md, sección 4 (Solución / Modelo de IA)
+
+docs/arquitectura.md, tabla de especificación del stack tecnológico
+
+docs/marco_metodologico.md, Fase 5 (Despliegue)
