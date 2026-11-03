@@ -22,7 +22,7 @@ El `SISTEMA_PROMPT` actual contiene, entre otros datos fijos:
 | Dato en el prompt | Valor real actual (Supabase, post-carga) | ¿Coincide? |
 |---|---|---|
 | "381.624 registros de hurtos" | 633.803 filas en `registros_hurto` (381.624 es la suma de `cantidad`, una métrica distinta y también válida, pero probablemente quedó fija desde una carga anterior más pequeña) | Ambiguo — aclarar cuál de las dos cifras se quiso comunicar |
-| "2.150 municipios" | 1.017 municipios con datos cargados actualmente | ❌ No coincide |
+| "2.150 municipios" | 1.017 municipios con datos cargados actualmente |  No coincide |
 | "33 departamentos" | Pendiente de verificar contra `SELECT COUNT(DISTINCT departamento) FROM ubicaciones` | Sin confirmar |
 | "Escopolamina" como modalidad de arma/medio | No aparece en el top 5 de `armas_medios` (ver `conclusiones.md`); puede existir más abajo en la tabla, pero no se confirmó | Sin confirmar |
 
